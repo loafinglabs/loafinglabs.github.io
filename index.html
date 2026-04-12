@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noodle — Your 10-Second Silly Break</title>
+  <meta name="description" content="A micro-break app for humans who need ten seconds of silly. Coming soon to iOS and Android." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23E8650A'/><text y='.82em' font-size='68' font-family='Georgia,serif' fill='white' x='16' font-weight='bold'>N</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E8650A;
+      --orange-light: #FF7A1F;
+      --cream: #FFFDF9;
+      --card: #FFF0DC;
+      --text-dark: #2D2008;
+      --text-mid: #7A5C38;
+      --text-light: #B8956A;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND BLOBS — pure CSS, zero assets ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.28;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+    .blob-1 {
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, #FFB347, #E8650A);
+      top: -160px; left: -140px;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #FFD580, #FF8C42);
+      bottom: -120px; right: -100px;
+      animation-duration: 18s;
+      animation-delay: -8s;
+    }
+    .blob-3 {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, #FFF0DC, #FFB347);
+      top: 38%; left: 58%;
+      animation-duration: 26s;
+      animation-delay: -14s;
+    }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(28px, -36px) scale(1.05); }
+      100% { transform: translate(-18px, 28px) scale(0.97); }
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    /* ── STATUS BADGE ── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1.5px solid rgba(232,101,10,0.22);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+      animation: fadeDown 0.7s ease both;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.6); opacity: 0.45; }
+    }
+
+    /* ── WORDMARK ── */
+    .wordmark {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(72px, 16vw, 120px);
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      animation: fadeUp 0.7s ease 0.2s both;
+      letter-spacing: -1px;
+    }
+
+    /* ── TAGLINE ── */
+    .tagline {
+      font-size: clamp(15px, 3.5vw, 20px);
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 1.6rem;
+      letter-spacing: 0.01em;
+      animation: fadeUp 0.7s ease 0.35s both;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 4px;
+      margin: 0 auto 1.8rem;
+      animation: fadeUp 0.7s ease 0.45s both;
+    }
+
+    /* ── COPY ── */
+    .copy {
+      max-width: 420px;
+      font-size: clamp(14px, 3vw, 16px);
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease 0.55s both;
+    }
+    .copy strong {
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    /* ── NOTIFY FORM ── */
+    .notify-wrap {
+      width: 100%;
+      max-width: 400px;
+      animation: fadeUp 0.7s ease 0.7s both;
+      margin-bottom: 2.5rem;
+    }
+    .notify-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.9rem;
+    }
+    .notify-form {
+      display: flex;
+      gap: 8px;
+    }
+    .notify-input {
+      flex: 1;
+      padding: 13px 20px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(232,101,10,0.25);
+      background: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .notify-input::placeholder { color: var(--text-light); font-weight: 400; }
+    .notify-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232,101,10,0.10);
+    }
+    .notify-btn {
+      padding: 13px 24px;
+      border-radius: 50px;
+      border: none;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 18px rgba(232,101,10,0.32);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .notify-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(232,101,10,0.42);
+      background: var(--orange-light);
+    }
+    .notify-btn:active { transform: scale(0.97); }
+    .notify-success {
+      display: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-top: 0.8rem;
+    }
+
+    /* ── PLATFORM LINE ── */
+    .platform-line {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease 0.85s both;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      animation: fadeUp 0.7s ease 1s both;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      0%   { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .notify-form { flex-direction: column; }
+      .notify-input, .notify-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <main class="page">
+
+    <div class="status">
+      <div class="status-dot"></div>
+      Coming soon
+    </div>
+
+    <h1 class="wordmark">Noodle</h1>
+    <p class="tagline">Your 10-second silly break</p>
+
+    <div class="divider"></div>
+
+    <p class="copy">
+      One tap. <strong>Random silliness.</strong> Back to work before anyone notices.<br>
+      The micro-break app for humans who take their breaks seriously.<br>
+      (We do not take anything seriously.)
+    </p>
+
+    <div class="notify-wrap">
+      <p class="notify-label">Be first to know when we launch</p>
+      <div class="notify-form">
+        <input class="notify-input" type="email" id="emailInput" placeholder="your@email.com" />
+        <button class="notify-btn" onclick="handleNotify()">Notify me</button>
+      </div>
+      <p class="notify-success" id="notifySuccess">You're on the list. We'll be in touch.</p>
+    </div>
+
+    <p class="platform-line">Coming to iOS &amp; Android</p>
+
+    <p class="footer">
+      &copy; 2026 Noodle &nbsp;&middot;&nbsp; No ads. Ever. &nbsp;&middot;&nbsp; Made with silly intentions.
+    </p>
+
+  </main>
+
+  <script>
+    function handleNotify() {
+      const input = document.getElementById('emailInput');
+      const success = document.getElementById('notifySuccess');
+      const btn = document.querySelector('.notify-btn');
+      if (!input.value || !input.value.includes('@')) {
+        input.style.borderColor = '#E8650A';
+        input.focus();
+        return;
+      }
+      btn.textContent = 'Done!';
+      btn.style.background = '#B34E08';
+      input.disabled = true;
+      btn.disabled = true;
+      success.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
