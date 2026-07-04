@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noodle Support — We're Here to Help (Sort Of Officially)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8650A;
+    --bg: #FFFDF9;
+    --card: #FFF0DC;
+    --navy: #1A1A2E;
+    --text: #3A3226;
+    --text-soft: #7A6F5E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  .hero-bowl {
+    width: 56px;
+    height: auto;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 40px;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+
+  .subhead {
+    font-size: 18px;
+    color: var(--text-soft);
+    margin: 0 0 48px;
+    max-width: 480px;
+  }
+
+  .faq-item {
+    background: var(--card);
+    border-radius: 18px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .faq-item.open {
+    box-shadow: 0 6px 20px rgba(232, 101, 10, 0.15);
+  }
+
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 20px 22px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .noodle-toggle {
+    flex-shrink: 0;
+    width: 20px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item.open .noodle-toggle {
+    transform: rotate(90deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 22px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 500px;
+    padding: 0 22px 22px;
+  }
+
+  .faq-answer p { margin: 0 0 12px; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer strong { color: var(--orange); }
+
+  .contact-block {
+    margin-top: 48px;
+    text-align: center;
+    padding: 32px 24px;
+    background: var(--navy);
+    border-radius: 20px;
+    color: #FFFDF9;
+  }
+
+  .contact-block h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    margin: 0 0 8px;
+    color: #fff;
+  }
+
+  .contact-block p {
+    margin: 0 0 18px;
+    color: #D9D5E8;
+    font-size: 15px;
+  }
+
+  .contact-block a.email-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-answer, .noodle-toggle, .faq-item { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <img src="images/bowl.svg" alt="Noodle bowl" class="hero-bowl">
+  <h1>Need a hand?</h1>
+  <p class="subhead">Before you panic — check below. Most Noodle mysteries are solved in about ten seconds. Fitting, really.</p>
+
+  <div id="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>I tapped 5 times and now nothing's happening. Is Noodle broken?</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>Nope! Free Noodle gives you 5 silly breaks a day — think of it like a snack jar that refills tomorrow. Come back after midnight (your time) for 5 more, or go Pro for unlimited slurps.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>I bought Pro but my phone still thinks I'm Free. Help!</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>This usually fixes itself in a few seconds. If it doesn't: tap <strong>"Go Pro"</strong> (you'll find it in Settings, or right on the home screen if you're capped out), then tap <strong>"Restore previous purchase."</strong> That's the app's way of saying "oh right, sorry, you DID pay me."</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>How do I get more Favorites? I'm capped at 5!</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>Free Noodlers get 5 favorite slots. Want to save a new one? You'll need to swap out an old fave to make room — or upgrade to Pro for unlimited favorites (no swapping required).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>I want to cancel my Pro subscription.</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>Totally your call, no hard feelings. Cancel anytime through your phone's App Store or Google Play subscription settings — Noodle doesn't hold your subscription hostage.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Can I turn off the sound effects?</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>Yep — Settings → Sound Effects → Off. Silent slurping, if that's your vibe.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>I'm getting a new phone. Will I lose all my Favorites?</span>
+        <img src="images/bowl.svg" alt="" class="noodle-toggle">
+      </button>
+      <div class="faq-answer">
+        <p>Sadly, Noodle doesn't (yet!) have a magic cloud brain that remembers you across devices — your Favorites live locally on your phone, like sticky notes on your fridge. New phone = new fridge, blank notes. 😢</p>
+        <p><strong>Good news for Pro folks:</strong> Before you switch, go to Settings → Export Favorites and save the file to <strong>Files (iPhone) or iCloud Drive</strong> — that's exactly where "Restore" will go looking for it later, so keep it there. (Tucking it into Notes or another app is like hiding your fridge photo in a random drawer — Restore won't know to look there!) On your new phone, install Noodle, go to Settings → Restore Favorites, and pick that file. Ta-da — favorites are back on the new fridge.</p>
+        <p><em>(Free users: sorry, no export tool for you yet — but hey, that's what Pro's for 😉)</em></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contact-block">
+    <h2>Still stuck? Something broken? Just want to say hi?</h2>
+    <p>A real human reads every message. (No bots, no noodles pretending to type. Probably.)</p>
+    <a class="email-btn" href="mailto:hello@loafinglabs.com">Email hello@loafinglabs.com</a>
+  </div>
+
+  <footer>Made with love (and a lot of noodles) by Loafing Labs</footer>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var question = item.querySelector('.faq-question');
+    question.addEventListener('click', function () {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
